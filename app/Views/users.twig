@@ -1,0 +1,53 @@
+{% extends "index.twig" %}
+
+{% block title %}Users{% endblock %}
+
+{% block content %}
+<form action="adduser" method="POST" class="mb-3">
+    <div>
+        <p>
+            <label for="form-name">Name</label><br>
+            <input class="rounded-md shadow-sm py-1.5 pl-2 pr-3 mb-2 ring-1 ring-slate-900/10" id="form-name" name="name" type="text">
+        </p>
+        <p>
+            <label for="form-email">Email</label><br>
+            <input class="rounded-md shadow-sm py-1.5 pl-2 pr-3 mb-2 ring-1 ring-slate-900/10" id="form-email" name="email" type="text">
+        </p>
+        <p>
+            <label for="form-password">Password</label><br>
+            <input class="rounded-md shadow-sm py-1.5 pl-2 pr-3 mb-2 ring-1 ring-slate-900/10" id="form-password" name="password" type="text">
+        </p>
+        <button class="rounded-md shadow-sm py-1.5 pl-2 pr-3 ring-1 ring-slate-900/10" type="submit">Add User</button>
+    </div>
+</form>
+{% for user in users %}
+<div class="my-2">
+<form action="updateuser" method="POST" class="mb-3">
+    <div>
+        <p>
+            <label for="form-name">Name</label><br>
+            <input
+                class="rounded-md shadow-sm py-1.5 pl-2 pr-3 mb-2 ring-1 ring-slate-900/10"
+                id="form-name" name="name" type="text" value="{{user.name}}">
+        </p>
+        <p>
+            <label for="form-email">Email</label><br>
+            <input
+                class="rounded-md shadow-sm py-1.5 pl-2 pr-3 mb-2 ring-1 ring-slate-900/10"
+                id="form-email" name="email" type="text" value="{{user.email}}">
+        </p>
+        <p>
+            <label for="form-password">Password</label><br>
+            <input
+                class="rounded-md shadow-sm py-1.5 pl-2 pr-3 mb-2 ring-1 ring-slate-900/10"
+                id="form-password" name="password" type="text" value="{{user.password}}">
+        </p>
+        <button class="rounded-md shadow-sm py-1.5 pl-2 pr-3 ring-1 ring-slate-900/10" type="submit" name="update" value="{{ user.id }}">Update</button>
+    </div>
+</form>
+<form action="deleteuser" method="POST">
+    <button class="rounded-md shadow-sm py-1.5 pl-2 pr-3 ring-1 ring-slate-900/10" type="submit" name="delete" value="{{ user.id }}">Delete</button>
+</form>
+</div>
+{% endfor %}
+{% endblock %}
